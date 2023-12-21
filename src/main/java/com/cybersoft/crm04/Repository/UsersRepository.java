@@ -1,11 +1,13 @@
 package com.cybersoft.crm04.Repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.cybersoft.crm04.Entity.Users;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface Users extends JpaRepository<Users,Integer> {
+@Repository
+public interface UsersRepository extends JpaRepository<Users,Integer> {
 
-    List<Users> findByEmailAndPassWord(String email, String password);
+    List<Users> findByEmailAndPassword(String email, String password);
 }

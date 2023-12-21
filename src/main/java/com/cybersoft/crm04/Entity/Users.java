@@ -1,9 +1,22 @@
 package com.cybersoft.crm04.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+/*
+ * để mapping khóa ngoại trong entity:
+ * bước 1: xem khóa chính 2 bảng quan hệ với nhau có phải là tự động tăng hay không.Nếu tựu động tăng
+ *  thì không phải là OneToOne => OneToMany
+ * Bước 2: Nếu khóa chính không tựu đông tăng vầ vừa là khóa chính và khóa ngoại =>OneToOne;
+ *
+ *
+ * (*) : OneToMany: Entity nào giữ khóa ngoại thì sẽ có 2 Anotation sau đây:
+ * -@ManyToOne và @JoinColunm
+ * Bảng nào được tham chiếu khóa ngoại sẽ map ngược lại
+ * */
 @Entity(name = "users")
-public class User {
+@Data
+public class Users {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id")
@@ -16,8 +29,13 @@ public class User {
     private String fullname;
     @Column(name = "avatar")
     private String avatar;
-    @Column(name = "role_id")
-    private int roleid;
+ /*   @Column(name = "role_id")
+    private int roleid;*/
+
+@ManyToOne
+    @JoinColumn(name = "role_id")//tên cột khóa ngoại trong database dùng để liên kết dữ liệu
+    private Roles roles;//dựa vào OneToMany hay ManyToOne thì sẽ biết được 1 list đối tượng(OneToMany)
+    // hay 1 đối tượng(ManyToOne)
 
     public int getId() {
         return id;
@@ -59,11 +77,11 @@ public class User {
         this.avatar = avatar;
     }
 
-    public int getRoleid() {
-        return roleid;
+    public Roles getRoles() {
+        return roles;
     }
 
-    public void setRoleid(int roleid) {
-        this.roleid = roleid;
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
 }
