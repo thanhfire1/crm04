@@ -29,7 +29,7 @@ private UsersRepository usersRepository;
         return "login";
     }
     @PostMapping("/index")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
+    public String processLogin(@RequestParam String email, @RequestParam String password,Model model) {
         // Thực hiện kiểm tra đăng nhập ở đây
         List<Users> userList = usersRepository.findByEmailAndPassword(email, password);
 
