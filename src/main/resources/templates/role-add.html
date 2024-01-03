@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -7,24 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="@{/plugins/images/favicon.png}">
     <title>Pixel Admin</title>
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Menu CSS -->
-    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link th:href="@{/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css}" rel="stylesheet">
     <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <!-- color CSS -->
-    <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <link th:href="@{/css/colors/blue-dark.css}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    [if lt IE 9]>
+    <script th:src="@{/https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script th:src="@{/https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js}"></script>
+<![endif]
 </head>
 
 <body>
@@ -130,18 +130,24 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <div th:if="${tb}" class="alert alert-danger" role="alert">
+                                Thông báo: Them Quyen That Bai!
+                            </div>
+                            <div th:if="${tb2}" class="alert alert-danger" role="alert">
+                                Thông báo: Them Quyen Thanh Cong!
+                            </div>
+                            <form th:action="@{/role/add}" method="post" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Tên quyền</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Tên quyền"
+                                        <input type="text" placeholder="Tên quyền" name="roleName"
                                             class="form-control form-control-line" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Mô tả</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Mô tả" class="form-control form-control-line" />
+                                        <input name="desc" type="text" placeholder="Mô tả" class="form-control form-control-line" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -149,6 +155,7 @@
                                         <button type="submit" class="btn btn-success">Add Role</button>
                                         <a href="role-table.html" class="btn btn-primary">Quay lại</a>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
@@ -164,17 +171,17 @@
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script th:src="@{/plugins/bower_components/jquery/dist/jquery.min.js}"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script th:src="@{/bootstrap/dist/js/bootstrap.min.js}"></script>
     <!-- Menu Plugin JavaScript -->
-    <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <script th:src="@{/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js}"></script>
     <!--slimscroll JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
+    <script th:src="@{/js/jquery.slimscroll.js}"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script th:src="@{/js/waves.js}"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="js/custom.min.js"></script>
+    <script th:src="@{/js/custom.min.js}"></script>
 </body>
 
 </html>
