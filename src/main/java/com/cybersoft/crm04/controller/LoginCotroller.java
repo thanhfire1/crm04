@@ -1,10 +1,12 @@
 package com.cybersoft.crm04.controller;
 
+import com.cybersoft.crm04.Entity.Roles;
 import com.cybersoft.crm04.Entity.Users;
 import com.cybersoft.crm04.Repository.UsersRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,15 +48,18 @@ private UsersRepository usersRepository;
     }
 
     @PostMapping("/index")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletResponse response, HttpServletRequest request) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletResponse response, HttpServletRequest request, HttpSession httpSession ,boolean remember) {
         // Thực hiện kiểm tra đăng nhập ở đây
         List<Users> userList = usersRepository.findByEmailAndPassword(email, password);
+        Roles roles;
 
+        Cookie cookie;
+        Cookie cookie1;
         if (userList != null && !userList.isEmpty()) {
             // Đăng nhập thành công
 
-            Cookie cookie = new Cookie("email", email);
-            Cookie cookie1 = new Cookie("password", password);
+            cookie = new Cookie("email", email);
+            cookie1 = new Cookie("password", password);
 
             response.addCookie(cookie);
             response.addCookie(cookie1);
@@ -63,6 +68,11 @@ private UsersRepository usersRepository;
             // Đăng nhập thất bại
             model.addAttribute("error", "Invalid email or password");
             return "login";
+        }
+
+        if (cookie != null && cookie1 !=null){
+
+            return "index";
         }
     }
 }

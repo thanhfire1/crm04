@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.net.URL;
 import java.net.URLEncoder;
-import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
 
 @Controller
@@ -17,25 +15,32 @@ import java.nio.charset.StandardCharsets;
 public class DemoCookieController {
 
     @GetMapping("")
-    public String createCookie(HttpServletResponse response , HttpServletRequest request){
-//        Cookie cookie = new Cookie("hello", "elacookienek!!!!");
-//        Cookie cookie1 = new Cookie("username", URLEncoder.encode("e là cookienek!!!!", StandardCharsets.UTF_8));
+    public String createCookie(HttpServletResponse response, HttpServletRequest request){
+//        //Tạo cookie
+//        Cookie cookie = new Cookie("hello","Emlacookiene");
+//        Cookie cookie1 = new Cookie("username", URLEncoder.encode("Nguyễn Văn A", StandardCharsets.UTF_8));
 //
+//        //server bắt client tạo cookie
 //        response.addCookie(cookie);
 //        response.addCookie(cookie1);
-// lấy toàn bộ cookie client truyền lên
+
+//        Lấy toàn bộ cookie client truyền lên
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie: cookies) {
-           // lấy tên cookie đang duyệt đến
+
+//       Duyệt qua từng cookie
+        for(Cookie cookie : cookies){
+//            Lấy tên cookie đang duyệt đến
             String name = cookie.getName();
+//            Lấy giá trị cookie đang duyệt đến
             String value = cookie.getValue();
 
-            if (name.equals("hello") ){
-
+            if(name.equals("hello")){
+                System.out.println("Kiem tra name " + name);
+                System.out.println("Kiemtra value " + value);
             }
-            System.out.println("Kiem Tra name" + name);
-            System.out.println("Kiem Tra value" + value);
         }
+
         return "login";
     }
+
 }
